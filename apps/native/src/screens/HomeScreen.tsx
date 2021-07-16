@@ -3,6 +3,7 @@ import { FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import CategoryPageHeader from '../components/CategoryPageHeader';
+import CategoryTabList from '../components/CategoryTabList';
 
 const HomeScreen = () => {
   const { top } = useSafeAreaInsets();
@@ -16,7 +17,7 @@ const HomeScreen = () => {
       ListHeaderComponent={
         <>
           <CategoryPageHeader title="Personal Care" />
-          <CategoryTabList current={currentCategory} />
+          <CategoryTabList current={currentCategory} onChange={setCurrentCategory} />
         </>
       }
     />
