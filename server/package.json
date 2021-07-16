@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsnd --respawn --transpile-only --ignore-watch node_modules --no-notify src/main.ts",
+    "build": "tsc -b",
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
