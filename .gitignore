@@ -1,0 +1,31 @@
+# deps
+node_modules
+.yarn-cache
+
+# compiled output
+__generated__
+.expo
+dist
+tsconfig*.tsbuildinfo
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+__ignore/
+
+# System Files
+.DS_Store
+Thumbs.db

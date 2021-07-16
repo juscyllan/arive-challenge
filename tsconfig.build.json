@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "composite": true,
+    "incremental": true,
+    "noEmit": false,
+    "baseUrl": "./",
+    "paths": {
+      "@klog/shared": [
+        "./libs/shared/src/index.ts"
+      ],
+      "@klog/domain": [
+        "./libs/domain/src/index.ts"
+      ]
+    }
+  }
+}

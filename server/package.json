@@ -1,0 +1,12 @@
+{
+  "name": "@arive/server",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsnd --respawn --transpile-only --ignore-watch node_modules --no-notify src/main.ts",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "fastify": "^3.19.1"
+  }
+}
