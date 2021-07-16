@@ -1,28 +1,41 @@
 import React, { useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useQuery } from 'react-query';
 
 import CategoryPageHeader from '../components/CategoryPageHeader';
 import CategoryTabList from '../components/CategoryTabList';
 import ProductGridEntry from '../components/ProductGridEntry';
+import UILoading from '../components/ui/UILoading';
 import UISpan from '../components/ui/UISpan';
+import { getCategoryDetails, getProducts } from '../service/api';
 import { Units } from '../theme';
 
 const HomeScreen = () => {
   const { top } = useSafeAreaInsets();
-  const [currentCategory, setCurrentCategory] = useState(0);
+  const [currentCategory, setCurrentCategory] = useState<string>();
+
+  const cat = useQuery('category', getCategoryDetails);
+  const products = useQuery(['products', currentCategory], () => getProducts(currentCategory));
+  if (!cat.data || cat.isLoading) return <UILoading style={{ marginTop: top }} />;
+
   return (
     <FlatList
       style={{ marginTop: top }}
-      data={[1, 2, 3, 4, 5, 6, 7, 8]}
+      data={products.data}
       numColumns={2}
-      keyExtractor={i => `${i}`}
-      renderItem={() => <ProductGridEntry style={styles.entry} />}
+      keyExtractor={i => `${i.id}`}
+      renderItem={({ item }) => <ProductGridEntry style={styles.entry} product={item} />}
       columnWrapperStyle={styles.column}
+      ListEmptyComponent={products.isLoading ? <UILoading /> : null}
       ListHeaderComponent={
         <>
-          <CategoryPageHeader title="Personal Care" />
-          <CategoryTabList current={currentCategory} onChange={setCurrentCategory} />
+          <CategoryPageHeader title={cat.data.name} />
+          <CategoryTabList
+            data={cat.data.subCategories}
+            current={currentCategory}
+            onChange={setCurrentCategory}
+          />
           <UISpan units={2} />
         </>
       }

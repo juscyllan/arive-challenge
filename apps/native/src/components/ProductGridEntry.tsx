@@ -1,23 +1,25 @@
 import React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
+import { ApiProduct } from '../service/api.types';
 import { Units } from '../theme';
 import UIPressable from './ui/UIPressable';
 import UIText from './ui/UIText';
 
 type Props = {
   style?: StyleProp<ViewStyle>;
+  product: ApiProduct;
   onPress?: () => void;
 };
 
-const ProductGridEntry = ({ style, onPress }: Props) => {
+const ProductGridEntry = ({ style, product, onPress }: Props) => {
   return (
     <UIPressable style={style} onPress={onPress}>
       <View style={styles.imageWrapper} />
 
-      <UIText style={styles.category}>Marvis</UIText>
-      <UIText style={styles.name}>Marvis Whitening Mint Toothpaste</UIText>
-      <UIText style={styles.price}>9,95 €</UIText>
+      <UIText style={styles.category}>{product.brand.name}</UIText>
+      <UIText style={styles.name}>{product.name}</UIText>
+      <UIText style={styles.price}>{product.price} €</UIText>
     </UIPressable>
   );
 };
